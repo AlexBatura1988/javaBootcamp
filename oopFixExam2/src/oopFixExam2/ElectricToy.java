@@ -6,9 +6,9 @@ public class ElectricToy extends Toy implements Playable {
 	protected int volume;
 	protected CountBattery countBattery;
 
-	public ElectricToy(String name, LocalDate purchaseDate, String serialNumber, ChildCategory childCategory,
-			int volume, CountBattery countBattery) {
-		super(name, purchaseDate, serialNumber, childCategory);
+	public ElectricToy(Kid kid, String name, LocalDate purchaseDate, String serialNumber, int volume,
+			CountBattery countBattery) {
+		super(kid, name, purchaseDate, serialNumber);
 		this.countBattery = countBattery;
 		setVolume(volume);
 	}
@@ -23,15 +23,22 @@ public class ElectricToy extends Toy implements Playable {
 
 	@Override
 	public void play() {
-		volume--;
+		int yearsOfToy = LocalDate.now().getYear() - purchaseDate.getYear();
+		if (yearsOfToy == 0 && kid.getChildAgeInYears() >= 0 && kid.getChildAgeInYears() < 11) {
+			volume--;
+			System.out.println(this);
+		} else {
+			System.out.println("kid cannot play because years of toy is: " + yearsOfToy + ",kid age is: "
+					+ kid.getChildAgeInYears());
+
+		}
 
 	}
 
 	@Override
 	public String toString() {
-		return "ElectricToy{" + "name='" + name + '\'' + ", purchaseDate=" + purchaseDate + ", serialNumber='"
-				+ serialNumber + '\'' + ", childCategory=" + childCategory + "volume=" + volume + ", countBattery="
-				+ countBattery + '}';
+		return "ElectricToy{" + kid + "name='" + name + '\'' + ", purchaseDate=" + purchaseDate + ", serialNumber='"
+				+ serialNumber + '\'' + "volume=" + volume + ", countBattery=" + countBattery + '}';
 	}
 
 	public enum CountBattery {

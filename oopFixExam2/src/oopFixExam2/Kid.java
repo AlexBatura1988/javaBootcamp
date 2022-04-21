@@ -11,14 +11,17 @@ public class Kid {
 		this.name = name;
 		this.birthDate = birthDate;
 	}
+	public int getChildAgeInYears() {
+		return LocalDate.now().getYear() - birthDate.getYear();
+	}
 
 	@Override
 	public String toString() {
 		LocalDate today = LocalDate.now();
 		Period period = Period.between(birthDate, today);
 		int birthday = period.getYears() + period.getMonths() + period.getDays();
-		return "Kid{" + "name='" + name + '\'' + ", dateOfBirth=" + period.getYears() + "year " + period.getMonths()
-				+ "month " + period.getDays() + "days " + '}';
+		return "Kid{" + "name='" + name + '\'' + ", dateOfBirth = (" + period.getYears() + " year, " + period.getMonths()
+				+ " month, " + period.getDays() + " days)" + '}';
 	}
 
 }
