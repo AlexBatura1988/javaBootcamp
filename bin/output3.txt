@@ -1,0 +1,2 @@
+this is data I want to write
+ age= 33 and money = 123.449997
